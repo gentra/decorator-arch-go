@@ -1,0 +1,98 @@
+### Task Management API Examples
+### Use this file with VS Code REST Client extension
+
+@baseUrl = http://localhost:8080/api
+@token = user_123e4567-e89b-12d3-a456-426614174000
+
+### Health Check
+GET http://localhost:8080/health
+
+### 1. Register a new user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "securepassword123",
+  "first_name": "John",
+  "last_name": "Doe"
+}
+
+### 2. Login with user credentials
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "securepassword123"
+}
+
+### 3. Get current user info (requires authentication)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{token}}
+
+### 4. Logout (requires authentication)
+POST {{baseUrl}}/auth/logout
+Authorization: Bearer {{token}}
+
+### 5. Get user profile (requires authentication)
+GET {{baseUrl}}/users/profile
+Authorization: Bearer {{token}}
+
+### 6. Update user profile (requires authentication)
+PUT {{baseUrl}}/users/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "first_name": "John Updated",
+  "last_name": "Doe Updated",
+  "email": "john.updated@example.com"
+}
+
+### 7. Get user preferences (requires authentication)
+GET {{baseUrl}}/users/preferences
+Authorization: Bearer {{token}}
+
+### 8. Update user preferences (requires authentication)
+PUT {{baseUrl}}/users/preferences
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "notification_email": true,
+  "notification_push": false,
+  "notification_sms": false,
+  "theme": "dark",
+  "language": "en",
+  "timezone": "UTC",
+  "date_format": "YYYY-MM-DD",
+  "time_format": "24h"
+}
+
+### Test with invalid token
+GET {{baseUrl}}/users/profile
+Authorization: Bearer invalid_token
+
+### Test without authorization header
+GET {{baseUrl}}/users/profile
+
+### Test registration with invalid data
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "invalid-email",
+  "password": "short",
+  "first_name": "",
+  "last_name": ""
+}
+
+### Test login with wrong credentials
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "wrong@example.com",
+  "password": "wrongpassword"
+}

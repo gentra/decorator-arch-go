@@ -1,0 +1,34 @@
+with-expecter: true
+all: true
+dir: "{{.InterfaceDir}}/mocks"
+filename: "{{.InterfaceName | snakecase}}.go"
+mockname: "{{.InterfaceName}}"
+outpkg: mocks
+packages:
+  github.com/gentra/decorator-arch-go/internal/user:
+    interfaces:
+      Service:
+  github.com/gentra/decorator-arch-go/internal/auth:
+    interfaces:
+      Service:
+  github.com/gentra/decorator-arch-go/internal/audit:
+    interfaces:
+      Service:
+  github.com/gentra/decorator-arch-go/internal/encryption:
+    interfaces:
+      Service:
+  github.com/gentra/decorator-arch-go/internal/ratelimit:
+    interfaces:
+      Service:
+  github.com/gentra/decorator-arch-go/internal/validation:
+    interfaces:
+      Service:
+  github.com/gentra/decorator-arch-go/internal/events:
+    interfaces:
+      Service:
+  github.com/gentra/decorator-arch-go/internal/notification:
+    interfaces:
+      Service:
+  github.com/gentra/decorator-arch-go/internal/token:
+    interfaces:
+      Service:
